@@ -41,6 +41,13 @@ public class PanelOperationsServiceImpl implements PanelOperationsService{
 		return panelResult;
 	}
 	
+	/**
+	 * Deletes a panel entity specified in the given contract if it exists and has a valid ID.
+	 *
+	 * Only users with HR role permission can perform this operation.
+	 *
+	 * @param panelContract contract containing the panel to be deleted
+	 */
 	@PreAuthorize("hasPermission('ROLE','HR')")
 	public void deletePanel(final PanelContract panelContract) {
 		if(panelContract.getPanel() != null && panelContract.getPanel().getPanelId() !=0) {
@@ -51,6 +58,13 @@ public class PanelOperationsServiceImpl implements PanelOperationsService{
 		}
 	}
 
+ /**
+  * Adds an existing panel to the repository if the provided contract contains a valid panel with a non-zero ID.
+  *
+  * Access is restricted to users with HR role permissions.
+  *
+  * @param panelContract the contract containing the panel to be added
+  */
  @PreAuthorize("hasPermission('ROLE','HR')")
  public void addPanel(final PanelContract panelContract) {
      if(panelContract.getPanel() != null && panelContract.getPanel().getPanelId() != 0) {
@@ -61,6 +75,13 @@ public class PanelOperationsServiceImpl implements PanelOperationsService{
      }
  }
 	
+	/**
+	 * Updates the fields of an existing Panel entity with values from another Panel instance.
+	 *
+	 * @param oldPanel the Panel entity to be updated
+	 * @param newPanel the Panel containing updated field values
+	 * @return the updated Panel entity
+	 */
 	public Panel populateNewPanelData(final Panel oldPanel, final Panel newPanel) {
 		oldPanel.setName(newPanel.getName());
 		oldPanel.setTechStreams(newPanel.getTechStreams());
