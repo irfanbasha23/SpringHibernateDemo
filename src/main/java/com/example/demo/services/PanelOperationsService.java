@@ -13,4 +13,6 @@ public interface PanelOperationsService {
 	public PanelResult updatePanelData(final PanelContract panelContract);
 	
 	public void deletePanel(final PanelContract panelContract);
+
+	public void addPanel(final PanelContract panelContract);
 }

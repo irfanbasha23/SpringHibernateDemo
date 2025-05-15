@@ -50,6 +50,16 @@ public class PanelOperationsServiceImpl implements PanelOperationsService{
 			}
 		}
 	}
+
+ @PreAuthorize("hasPermission('ROLE','HR')")
+ public void addPanel(final PanelContract panelContract) {
+     if(panelContract.getPanel() != null && panelContract.getPanel().getPanelId() != 0) {
+         Optional<Panel> panel = panelRepository.findById(panelContract.getPanel().getPanelId());
+         if(panel.isPresent()) {
+             panelRepository.add(panel.get());
+         }
+     }
+ }
 	
 	public Panel populateNewPanelData(final Panel oldPanel, final Panel newPanel) {
 		oldPanel.setName(newPanel.getName());
